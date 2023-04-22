@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58b3734b0cc9e0d4db14c373d62faee0, type: 3}
+  m_Name: BlockPlaceAbility
+  m_EditorClassIdentifier: 
+  cost: 1
+  incomeTime: 0.15
+  incomePushBox: 0.2
+  incomePushPlayer: 0
+  incomeGetPushed: 0
+  displayImage: {fileID: 627625725489826318, guid: d1d59a4223d9804468ab6b5a44ed16e9,
+    type: 3}
+  blockPool:
+    poolObject: {fileID: 4984149821538064934, guid: b7551589c4d81ff49991e1b639d81923,
+      type: 3}
+    initAmount: 5
+  placeTime: 0.5

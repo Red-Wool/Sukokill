@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfc3c4ce30d846f4593b8ada73f2adde, type: 3}
+  m_Name: ShootAbility
+  m_EditorClassIdentifier: 
+  cost: 1
+  incomeTime: 0.01
+  incomePushBox: 1
+  incomePushPlayer: 0.15
+  incomeGetPushed: 0
+  displayImage: {fileID: 6995750527968357485, guid: d1d59a4223d9804468ab6b5a44ed16e9,
+    type: 3}
+  blockPool:
+    poolObject: {fileID: 3496635857588777429, guid: 21082324bfda78349a5c414566fe3c52,
+      type: 3}
+    initAmount: 5

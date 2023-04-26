@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58b3734b0cc9e0d4db14c373d62faee0, type: 3}
+  m_Name: WeakBlock
+  m_EditorClassIdentifier: 
+  cost: 1
+  incomeTime: 10
+  incomePushBox: 0
+  incomePushPlayer: 0
+  incomeGetPushed: 0
+  displayImage: {fileID: 0}
+  blockPool:
+    poolObject: {fileID: 5530028290235211690, guid: f515fde8530371d4b8f6401ce59671a5,
+      type: 3}
+    initAmount: 10
+  placeTime: 0.5

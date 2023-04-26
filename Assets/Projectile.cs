@@ -20,7 +20,8 @@ public class Projectile : GridItem
 
     public override void Destroy()
     {
-        StartCoroutine(DestroyBox());
+        if (gameObject.activeSelf)
+            StartCoroutine(DestroyBox());
     }
 
     public IEnumerator DestroyBox()

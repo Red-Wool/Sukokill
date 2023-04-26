@@ -132,6 +132,38 @@ public class GameBoard : MonoBehaviour
         ReplacePosition(x, y, item);
     }
 
+    public void JumpSpawn(float delay, Vector2Int startPos, Vector2Int endPos, GridItem item)
+    {
+        if (!CheckBound(endPos))
+        {
+            Debug.Log("Out of Bounds! " + endPos.x + " " + endPos.y);
+            item.gameObject.SetActive(false);
+            return;
+        }
+
+        board.y[endPos.y].bg[endPos.x].Warn();
+        StartCoroutine(JumpSpawnEnumerator(delay, startPos, endPos, item));
+    }
+    public IEnumerator JumpSpawnEnumerator(float delay, Vector2Int startPos, Vector2Int endPos, GridItem item)
+    {
+
+        item.transform.rotation = Quaternion.identity;
+        item.transform.position = CalculatePosition(startPos);
+        item.transform.localScale = Vector3.zero;
+
+        //item.transform.DOMove(CalculatePosition(endPos, delay), delay).SetEase(Ease.Linear);
+        item.transform.DOScale(1.5f, delay * .5f).SetEase(Ease.OutCubic);
+        item.transform.DOLocalJump(CalculatePosition(endPos, delay), .25f, 1, delay);
+
+        yield return new WaitForSeconds(delay * .5f);
+
+        item.transform.DOScale(1, delay * .5f).SetEase(Ease.InCubic);
+
+        yield return new WaitForSeconds(delay * .5f);
+
+        ReplacePosition(endPos, item);
+    }
+
     public void DestroyPosition(int x, int y)
     {
         if (!CheckBound(new Vector2(x, y)))
@@ -145,6 +177,7 @@ public class GameBoard : MonoBehaviour
         board.y[y].item[x] = null;
     }
 
+    public void ReplacePosition(Vector2Int pos, GridItem item) { ReplacePosition(pos.x, pos.y, item); }
     public void ReplacePosition(int x, int y, GridItem item)
     {
         DestroyPosition(x, y);
@@ -153,6 +186,7 @@ public class GameBoard : MonoBehaviour
         item.transform.position = CalculatePosition(x, y);
     }
 
+    public Vector2 CalculatePosition(Vector2Int pos, float addTime = 0f) { return CalculatePosition(pos.x, pos.y, addTime); }
     public Vector2 CalculatePosition(int x, int y, float addTime = 0f)
     {
         float time = Time.fixedTime + addTime;

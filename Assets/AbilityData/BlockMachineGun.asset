@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfc3c4ce30d846f4593b8ada73f2adde, type: 3}
-  m_Name: ShootAbility
+  m_Name: BlockMachineGun
   m_EditorClassIdentifier: 
   cost: 1
-  incomeTime: 0.01
+  incomeTime: 0.3
   incomePushBox: 1
-  incomePushPlayer: 0.15
+  incomePushPlayer: 0
   incomeGetPushed: 0
-  displayImage: {fileID: 6995750527968357485, guid: d1d59a4223d9804468ab6b5a44ed16e9,
+  displayImage: {fileID: 3737897332693287829, guid: 2255c77d3282bb04381c1de31f75a80f,
     type: 3}
   blockPool:
-    poolObject: {fileID: 3496635857588777429, guid: 21082324bfda78349a5c414566fe3c52,
+    poolObject: {fileID: 4984149821538064934, guid: b7551589c4d81ff49991e1b639d81923,
       type: 3}
-    initAmount: 5
-  rounds: 50
-  fireRate: 0.15
+    initAmount: 1
+  rounds: 30
+  fireRate: 0.1

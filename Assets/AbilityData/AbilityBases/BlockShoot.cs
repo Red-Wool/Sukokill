@@ -60,7 +60,7 @@ public class BlockShoot : Ability
         Vector2Int spawnPos;
         for (int i = 0; i < rounds; i++)
         {
-            spawnPos = Vector2Int.RoundToInt(p.gridPos) + dir;
+            spawnPos = p.gridPos + dir;
             if (b.CheckBound(spawnPos))
             {
                 GridItem item = b.GetGridItem(spawnPos.x, spawnPos.y);

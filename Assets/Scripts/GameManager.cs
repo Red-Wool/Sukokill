@@ -41,6 +41,9 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
+        //TURBO!
+        //Time.timeScale = 3f;
+
         playerCount.value = roundData.playerNum;
         gameEnd = false;
         for (int i = 0; i < abilityPlayerSelect.Length; i++)

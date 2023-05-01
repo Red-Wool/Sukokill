@@ -22,6 +22,7 @@ MonoBehaviour:
   cost: 1
   maxExtraIncome: 0
   incomeTime: 0.15
+  incomeMove: 0
   incomePushBox: 0
   incomePushPlayer: 0
   incomeGetPushed: 0
@@ -29,4 +30,4 @@ MonoBehaviour:
     poolObject: {fileID: 7572761252484617574, guid: 2e46678dc0a1aa549a7f9997be6fae47,
       type: 3}
     initAmount: 5
-  controlTime: 1.5
+  controlTime: 3

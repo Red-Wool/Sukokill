@@ -15,6 +15,7 @@ public class Ability : ScriptableObject
     public float cost;
     public float maxExtraIncome;
     public float incomeTime;
+    public float incomeMove;
     public float incomePushBox;
     public float incomePushPlayer;
     public float incomeGetPushed;

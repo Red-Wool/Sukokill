@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: RoundData
   m_EditorClassIdentifier: 
   playerNum: 2
-  playerWin: 33000000180000000000000000000000
+  playerWin: 00000000000000000000000000000000
   playerAbility:
-  - {fileID: 11400000, guid: d35c3c541025fee43ae2962bc28b7dd4, type: 2}
-  - {fileID: 11400000, guid: 379f13250bbf8684488500749c135994, type: 2}
-  - {fileID: 11400000, guid: d35c3c541025fee43ae2962bc28b7dd4, type: 2}
+  - {fileID: 11400000, guid: 85478d98a63f488459cafc79b1a025ca, type: 2}
+  - {fileID: 11400000, guid: 85478d98a63f488459cafc79b1a025ca, type: 2}
+  - {fileID: 11400000, guid: 85478d98a63f488459cafc79b1a025ca, type: 2}
   - {fileID: 11400000, guid: 85478d98a63f488459cafc79b1a025ca, type: 2}

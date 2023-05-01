@@ -105,6 +105,7 @@ public class Player : GridItem
         switch (p)
         {
             case PlayerPushType.None:
+                abilityEnergy += ability.incomeMove;
                 break;
             case PlayerPushType.Box:
                 abilityEnergy += ability.incomePushBox;

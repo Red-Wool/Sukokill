@@ -6,6 +6,7 @@ using UnityEngine;
 public class LaunchPunch : Ability
 {
     public int spaces;
+    public bool canCrush;
 
     public override void ResetAbility()
     {
@@ -23,8 +24,8 @@ public class LaunchPunch : Ability
         for (int i = 0; i < spaces; i++)
         {
             nextItem = b.GetGridItem(p.gridPos + dir);
-            b.PlayerMove(p.gridPos, dir, true, out pushType);
-            if (pushType != PlayerPushType.None)
+            b.PlayerMove(p.gridPos-(canCrush ? dir : Vector2Int.zero), dir, !canCrush, out pushType);
+            if (nextItem != null)
             {
                 break;
             }

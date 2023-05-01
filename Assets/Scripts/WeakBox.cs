@@ -11,7 +11,7 @@ public class WeakBox : GridItem
     void Start()
     {
         CanCrush = true;
-        gridPos = transform.position;
+        gridPos = Vector2Int.RoundToInt(transform.position);
     }
 
 

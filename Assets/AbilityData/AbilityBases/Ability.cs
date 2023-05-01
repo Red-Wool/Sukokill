@@ -5,13 +5,20 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Ability/Template")]
 public class Ability : ScriptableObject
 {
+    [Header("Ability Info"), Space(10)]
+    public Sprite displayImage;
+    public string abilityName;
+    [TextArea]
+    public string abilityDescription;
+
+    [Space(10),Header("Cost"),Space(10)]
     public float cost;
+    public float maxExtraIncome;
     public float incomeTime;
     public float incomePushBox;
     public float incomePushPlayer;
     public float incomeGetPushed;
-
-    public Sprite displayImage;
+    
 
     public virtual void ResetAbility()
     {

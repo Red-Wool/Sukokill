@@ -28,7 +28,7 @@ public class Box : GridItem
     void Start()
     {
         CanCrush = false;
-        gridPos = transform.position;
+        gridPos = Vector2Int.RoundToInt(transform.position);
     }
 
     // Update is called once per frame

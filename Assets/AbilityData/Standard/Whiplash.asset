@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b0483e5eef74a1449fd87fc2a3c515a, type: 3}
-  m_Name: MultiPushAbility
+  m_Name: Whiplash
   m_EditorClassIdentifier: 
+  displayImage: {fileID: 21300000, guid: 5826e58cb4ee8fc4ca1fc3fd8e1a06a2, type: 3}
+  abilityName: Whiplash
+  abilityDescription: Pushes Objects Two Spaces in front
   cost: 1
+  maxExtraIncome: 0
   incomeTime: 0.03
   incomePushBox: 0.02
   incomePushPlayer: 0.025
   incomeGetPushed: 0
-  displayImage: {fileID: 21300000, guid: 5826e58cb4ee8fc4ca1fc3fd8e1a06a2, type: 3}
   particle:
     poolObject: {fileID: 7403818098412901857, guid: fd8c3ca1ed4b5434399bdcf910837238,
       type: 3}

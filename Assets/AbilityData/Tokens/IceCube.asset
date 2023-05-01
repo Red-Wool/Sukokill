@@ -10,17 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58b3734b0cc9e0d4db14c373d62faee0, type: 3}
-  m_Name: BombPlaceAbility
+  m_Name: IceCube
   m_EditorClassIdentifier: 
   cost: 1
-  incomeTime: 0
-  incomePushBox: 0.2
-  incomePushPlayer: 0.05
+  incomeTime: 100
+  incomePushBox: 0
+  incomePushPlayer: 0
   incomeGetPushed: 0
-  displayImage: {fileID: -4309738878335270719, guid: d1d59a4223d9804468ab6b5a44ed16e9,
-    type: 3}
+  displayImage: {fileID: 0}
   blockPool:
-    poolObject: {fileID: 5926833995263177238, guid: 13482eb0c78f0c74ab172ebe3bb7ab04,
+    poolObject: {fileID: 7699717934427379393, guid: 1c49d1515e1be9f40b29e9460aae12b1,
       type: 3}
-    initAmount: 5
+    initAmount: 10
   placeTime: 0.5

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dc7d39c96f357c419d50589e4190cd4, type: 3}
+  m_Name: MagicHat
+  m_EditorClassIdentifier: 
+  cost: 1
+  incomeTime: 100
+  incomePushBox: 0
+  incomePushPlayer: 0
+  incomeGetPushed: 0
+  displayImage: {fileID: 0}
+  abilityList:
+  - {fileID: 11400000, guid: 379f13250bbf8684488500749c135994, type: 2}
+  - {fileID: 11400000, guid: e4d18c23ab75cf84c88ca00088e18e76, type: 2}
+  - {fileID: 11400000, guid: f03f966548e27574284c23696961d6e3, type: 2}
+  - {fileID: 11400000, guid: 83e7e19cdb9020842bb63f5ff4c665f1, type: 2}
+  - {fileID: 11400000, guid: 1540bd69367413344b9507456a0e53e7, type: 2}
+  - {fileID: 11400000, guid: 9d5b86c5906aa6c4e8c8e57f80be5d23, type: 2}
+  - {fileID: 11400000, guid: 135925a934136fd47a304d5695a9e93a, type: 2}

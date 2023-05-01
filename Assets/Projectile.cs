@@ -5,11 +5,12 @@ using DG.Tweening;
 
 public class Projectile : GridItem
 {
-    public Vector2 moveDir;
+    public Vector2Int moveDir;
     [SerializeField] private float tickMove;
 
     private float timer;
     private GameBoard board;
+    private GridItem nextItem;
 
     private PlayerPushType pushType;
 
@@ -37,6 +38,7 @@ public class Projectile : GridItem
     {
         board = b;
         timer = tickMove;
+        nextItem = null;
 
         transform.localScale = Vector3.zero;
         transform.rotation = Quaternion.identity;
@@ -47,7 +49,7 @@ public class Projectile : GridItem
     void Start()
     {
         CanCrush = false;
-        gridPos = transform.position;
+        gridPos = Vector2Int.RoundToInt(transform.position);
     }
 
     // Update is called once per frame
@@ -60,20 +62,24 @@ public class Projectile : GridItem
             timer -= Time.deltaTime;
             if (timer <= 0f)
             {
+                nextItem = board.GetGridItem(Vector2Int.RoundToInt(gridPos + moveDir));
                 board.PlayerMove(gridPos, moveDir, false, out pushType);
                 if (pushType != PlayerPushType.None)
                 {
-                    Destroy();
+                    HitObject(nextItem);
                 }
                 else
                 {
                     timer = tickMove;
                 }
                 board.PlayerMove(gridPos - moveDir, moveDir, false, out pushType);
-                
-
-                
             }
         }
+    }
+
+    public virtual void HitObject(GridItem item)
+    {
+        board.DestroyPosition((int)gridPos.x, (int)gridPos.y);
+        //Destroy();
     }
 }

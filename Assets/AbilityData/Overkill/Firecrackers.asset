@@ -10,20 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 020c9cf7ae5032e4b828d6443ddcbf1f, type: 3}
-  m_Name: NoPassMass
+  m_Name: Firecrackers
   m_EditorClassIdentifier: 
   cost: 1
-  incomeTime: 0.1
+  incomeTime: 10
   incomePushBox: 0
-  incomePushPlayer: 0.1
+  incomePushPlayer: 0
   incomeGetPushed: 0
-  displayImage: {fileID: 21300000, guid: 0779ad3feec52124e97114bcbb12ef13, type: 3}
+  displayImage: {fileID: -7767105433804115491, guid: 2255c77d3282bb04381c1de31f75a80f,
+    type: 3}
   blockPool:
-    poolObject: {fileID: 5530028290235211690, guid: f515fde8530371d4b8f6401ce59671a5,
+    poolObject: {fileID: 5926833995263177238, guid: 13482eb0c78f0c74ab172ebe3bb7ab04,
       type: 3}
     initAmount: 10
-  placeTime: 1
+  placeTime: 2.95
   spawnPositions:
-  - {x: 2, y: 1}
-  - {x: 2, y: 0}
-  - {x: 2, y: -1}
+  - {x: 1, y: 1}
+  - {x: 1, y: 0}
+  - {x: 1, y: -1}
+  - {x: 0, y: 1}
+  - {x: -1, y: -1}
+  - {x: 0, y: -1}
+  - {x: -1, y: 1}
+  - {x: -1, y: 0}

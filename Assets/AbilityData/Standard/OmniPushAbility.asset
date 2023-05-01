@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e982fd29665b6d240a92ad01725677df, type: 3}
   m_Name: OmniPushAbility
   m_EditorClassIdentifier: 
+  displayImage: {fileID: 6338068570567419226, guid: d1d59a4223d9804468ab6b5a44ed16e9,
+    type: 3}
+  abilityName: Omnipush
+  abilityDescription: Pushes objects around you back
   cost: 1
-  incomeTime: 0.1
+  maxExtraIncome: 0
+  incomeTime: 0.2
   incomePushBox: 0
   incomePushPlayer: 0.25
   incomeGetPushed: 0
-  displayImage: {fileID: 6338068570567419226, guid: d1d59a4223d9804468ab6b5a44ed16e9,
-    type: 3}
   particle:
     poolObject: {fileID: 9174725965204455394, guid: 1a86fe8502452ae438c8656ebce210b4,
       type: 3}

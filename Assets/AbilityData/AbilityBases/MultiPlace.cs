@@ -31,7 +31,7 @@ public class MultiPlace : Ability
         for (int i = 0; i < spawnPositions.Length; i++)
         {
             Vector2 pos = new Vector2(spawnPositions[i].x, spawnPositions[i].y).Rotate(a);
-            Debug.Log(spawnPositions[i] + " " + pos);
+            //Debug.Log(spawnPositions[i] + " " + pos);
             Vector2Int spawnPos = new Vector2Int(Mathf.RoundToInt(p.gridPos.x + pos.x), Mathf.RoundToInt(p.gridPos.y + pos.y));
             if (!b.CheckBound(spawnPos))
                 continue;

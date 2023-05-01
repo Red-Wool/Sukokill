@@ -10,17 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58b3734b0cc9e0d4db14c373d62faee0, type: 3}
-  m_Name: BlockPlaceAbility
+  m_Name: Blockus
   m_EditorClassIdentifier: 
+  displayImage: {fileID: 7920555144810264317, guid: d1d59a4223d9804468ab6b5a44ed16e9,
+    type: 3}
+  abilityName: 
+  abilityDescription: 'Summons an unmovable block in front of you
+
+'
   cost: 1
+  maxExtraIncome: 0
   incomeTime: 0.15
-  incomePushBox: 0.2
+  incomePushBox: 0
   incomePushPlayer: 0
   incomeGetPushed: 0
-  displayImage: {fileID: 627625725489826318, guid: d1d59a4223d9804468ab6b5a44ed16e9,
-    type: 3}
   blockPool:
-    poolObject: {fileID: 4984149821538064934, guid: b7551589c4d81ff49991e1b639d81923,
+    poolObject: {fileID: 1128913427562971313, guid: 3568a0ec2c7ca4a47be7e28e3678ce20,
       type: 3}
     initAmount: 5
   placeTime: 0.5

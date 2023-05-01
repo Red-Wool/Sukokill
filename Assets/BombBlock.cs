@@ -8,7 +8,7 @@ public class BombBlock : GridItem
     public GameBoard board;
     public ParticleSystem explode;
 
-    [SerializeField] private GameObject display; 
+    //[SerializeField] private GameObject display; 
     private float timer;
     private bool hasExplode;
     public override bool CanPush()
@@ -58,7 +58,7 @@ public class BombBlock : GridItem
     void Start()
     {
         CanCrush = false;
-        gridPos = transform.position;
+        gridPos = Vector2Int.RoundToInt(transform.position);
     }
 
     // Update is called once per frame
@@ -69,7 +69,7 @@ public class BombBlock : GridItem
             timer -= Time.deltaTime;
             if (timer <= 0f)
             {
-                Destroy();
+                board.DestroyPosition((int)gridPos.x, (int)gridPos.y);
             }
         }
         

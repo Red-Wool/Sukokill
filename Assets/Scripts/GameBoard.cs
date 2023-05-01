@@ -32,8 +32,14 @@ public class GameBoard : MonoBehaviour
         //return ()
     }
 
+    public GridItem GetGridItem(Vector2Int pos) { return GetGridItem(pos.x, pos.y); }
     public GridItem GetGridItem(int x, int y)
     {
+        if (!CheckBound(new Vector2(x, y)))
+        {
+            Debug.Log("Out of Bounds! " + x + " " + y);
+            return null;
+        }
         return board.y[y].item[x];
     }
 
@@ -85,7 +91,7 @@ public class GameBoard : MonoBehaviour
                     }
                     else
                     {
-                        board.y[y].item[x].Move(new Vector2(x, y), CalculatePosition(x, y));
+                        board.y[y].item[x].Move(new Vector2Int(x, y), CalculatePosition(x, y));
                     }
                     
                 }
@@ -195,9 +201,9 @@ public class GameBoard : MonoBehaviour
         return (new Vector2(x, y) + gridOffset + gridChange) * (gridSize + sizeChange);
     }
 
-    public void PlayerMove(Vector2 pos, Vector2 dir, bool movePlayer, out PlayerPushType pushType)
+    public void PlayerMove(Vector2Int pos, Vector2Int dir, bool movePlayer, out PlayerPushType pushType)
     {
-        Vector2 curPos = pos + dir;
+        Vector2Int curPos = pos + dir;
         pushType = PlayerPushType.None;
 
         Stack<MoveOperation> op = new Stack<MoveOperation>();
@@ -252,6 +258,7 @@ public class GameBoard : MonoBehaviour
         foreach (MoveOperation o in op)
         {
             //Debug.Log(item);
+            o.item.GridMove(o.origin, o.result);
             board.y[(int)o.origin.y].item[(int)o.origin.x] = null;
             o.item.Move(o.result, CalculatePosition((int)o.result.x, (int)o.result.y));
             if (CheckBound(o.result) && (!o.invalid || board.y[(int)o.result.y].item[(int)o.result.x] == null))
@@ -284,8 +291,8 @@ public class Board
 public class MoveOperation
 {
     public GridItem item;
-    public Vector2 origin;
-    public Vector2 result;
+    public Vector2Int origin;
+    public Vector2Int result;
     public bool invalid;
 }
 

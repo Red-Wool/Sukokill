@@ -16,10 +16,10 @@ public class OmniPush : Ability
     public override bool UseAbility(Player p, GameBoard b)
     {
         PlayerPushType pushType;
-        p.board.PlayerMove(p.gridPos, Vector2.up, false, out pushType);
-        p.board.PlayerMove(p.gridPos, Vector2.down, false, out pushType);
-        p.board.PlayerMove(p.gridPos, Vector2.left, false, out pushType);
-        p.board.PlayerMove(p.gridPos, Vector2.right, false, out pushType);
+        p.board.PlayerMove(p.gridPos, Vector2Int.up, false, out pushType);
+        p.board.PlayerMove(p.gridPos, Vector2Int.down, false, out pushType);
+        p.board.PlayerMove(p.gridPos, Vector2Int.left, false, out pushType);
+        p.board.PlayerMove(p.gridPos, Vector2Int.right, false, out pushType);
 
         GameObject effect = particle.GetObject();
         effect.transform.position = p.transform.position;

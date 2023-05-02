@@ -20,11 +20,11 @@ MonoBehaviour:
   maxExtraIncome: 0
   incomeTime: 0
   incomeMove: 0
-  incomePushBox: 0.1
+  incomePushBox: 0.2
   incomePushPlayer: 0
   incomeGetPushed: 0
   blockPool:
     poolObject: {fileID: 6629002657696983443, guid: b26b55bba509f0b4980f348a59a9f2b5,
       type: 3}
     initAmount: 2
-  placeTime: 1
+  placeTime: 0.3

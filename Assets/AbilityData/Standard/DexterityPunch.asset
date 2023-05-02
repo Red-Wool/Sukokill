@@ -19,7 +19,7 @@ MonoBehaviour:
 
     Launch yourself forward'
   cost: 1
-  maxExtraIncome: 0.1
+  maxExtraIncome: 0.11
   incomeTime: 0.4
   incomeMove: -0.1
   incomePushBox: -0.1

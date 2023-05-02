@@ -12,8 +12,10 @@ public class Glow : Ability
 
     public override void ResetAbility()
     {
-        base.ResetAbility();
+        blockPool.Reset();
+        blockPool.AddObjects();
     }
+
 
     public override bool UseAbility(Player p, GameBoard b)
     {
@@ -38,9 +40,13 @@ public class Glow : Ability
             {
                 p.board.PlayerMove(p.gridPos, dir, false, out pushType);
 
-                t.teleKinesisObject = item;
-                item.GetDisplay().transform.DOShakePosition(3f, .2f, 100);
-                p.AddStatus(t);
+                if (item.GetComponent<Player>() == null)
+                {
+                    t.teleKinesisObject = item;
+                    item.GetDisplay().transform.DOShakePosition(3f, .2f, 100);
+                    p.AddStatus(t);
+                }
+                
             }
         }
         else

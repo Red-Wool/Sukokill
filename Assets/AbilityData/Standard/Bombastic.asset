@@ -19,7 +19,8 @@ MonoBehaviour:
   cost: 1
   maxExtraIncome: 0
   incomeTime: 0
-  incomePushBox: 0.2
+  incomeMove: 0
+  incomePushBox: 0.25
   incomePushPlayer: 0.05
   incomeGetPushed: 0
   blockPool:

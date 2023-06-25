@@ -7,21 +7,33 @@ using DG.Tweening;
 public class Player : GridItem
 {
     public GameBoard board;
+    public SpriteRenderer render;
     public PlayerControl controls;
-    public Ability ability;
+    public PlayerAbility abilityPrimary;
+    public PlayerAbility abilitySecondary;
     
-    public Image abilityDisplay;
-    public Image abilityIcon;
+    /*public Image abilityDisplayPrimary;
+    public Image abilityIconPrimary;
+    public Image abilityDisplaySecondary;
+    public Image abilityIconSecondary;
 
-    public float abilityEnergy;
+    public float abilityEnergyPrimary;
+    public float abilityEnergySecondary;*/
 
     public ParticleSystem death;
+    public ParticleSystem[] deathExtra;
+
+    //public Image abilityRender;
+    //public Image abilityBackgroundRender;
 
     public bool canMove;
     public Vector2Int lastMoveDirection { private set; get; }
     public Vector2Int currentInput { private set; get; }
 
     private List<Status> statuses;
+
+    private int stock;
+    private Vector2Int respawnPoint;
 
     //public delegate 
     //public event 
@@ -37,16 +49,27 @@ public class Player : GridItem
         canMove = true;
     }
 
-    public void ResetPlayer(Ability a)
+    public void ResetPlayer(CharacterData data, Ability primary, Ability secondary)
     {
-        a.ResetAbility();
 
         lastMoveDirection = Vector2Int.zero;
         canMove = true;
 
-        abilityEnergy = 0;
-        ability = a;
-        abilityIcon.sprite = ability.displayImage;
+        render.sprite = data.characterSprite;
+
+        var d = death.colorOverLifetime;
+        d.color = data.characterGradient;
+        var e = death.trails;
+        e.colorOverLifetime = data.characterGradient;
+
+        for (int i = 0; i < deathExtra.Length; i++)
+        {
+            var t = deathExtra[i].trails;
+            t.colorOverLifetime = data.characterGradient;
+        }
+
+        abilityPrimary.Reset(primary);
+        abilitySecondary.Reset(secondary);
     }
 
     public void AddStatus(Status s)
@@ -59,8 +82,10 @@ public class Player : GridItem
     {
         if (canMove)
         {
-            abilityDisplay.fillAmount = Mathf.Lerp(abilityDisplay.fillAmount, abilityEnergy / ability.cost, Time.deltaTime * 10f);
-            abilityEnergy += Time.deltaTime * ability.incomeTime;
+            abilityPrimary.Income();
+            abilitySecondary.Income();
+            //abilityDisplayPrimary.fillAmount = Mathf.Lerp(abilityDisplayPrimary.fillAmount, abilityEnergyPrimary / abilityPrimary.cost, Time.deltaTime * 10f);
+            //abilityEnergyPrimary += Time.deltaTime * abilityPrimary.incomeTime;
             Vector2Int dir = Vector2Int.right * ((Input.GetKeyDown(controls.right) ? 1 : 0) - (Input.GetKeyDown(controls.left) ? 1 : 0));
             if (dir.x == 0)
                 dir.y = ((Input.GetKeyDown(controls.up) ? 1 : 0) - (Input.GetKeyDown(controls.down) ? 1 : 0));
@@ -71,24 +96,33 @@ public class Player : GridItem
             {
                 lastMoveDirection = dir;
                 board.PlayerMove(gridPos, dir, true, out pushType);
-                EvaluteAbilityIncome(pushType);
+
+                abilityPrimary.EvaluteAbilityIncome(pushType);
+                abilitySecondary.EvaluteAbilityIncome(pushType);
+                //EvaluteAbilityIncome(pushType);
                 foreach (Status s in statuses)
                 {
                     s.OnMove(board, dir);
                 }
             }
 
-            if (Input.GetKeyDown(controls.ability) && ability.cost <= abilityEnergy)
+            if (Input.GetKeyDown(controls.abilityPrimary) && abilityPrimary.ability.cost <= abilityPrimary.energy)
             {
-                if (ability.UseAbility(this, board))
+                if (abilityPrimary.UseAbility(this, board))
                 {
                     //board.PlayerMove(gridPos, lastMoveDirection, true, out pushType);
-                    abilityEnergy = 0;
+                    abilityPrimary.energy = 0;
                 }
-                    
+            }
+            if (Input.GetKeyDown(controls.abilitySecondary) && abilitySecondary.ability.cost <= abilitySecondary.energy)
+            {
+                if (abilitySecondary.UseAbility(this, board))
+                {
+                    //board.PlayerMove(gridPos, lastMoveDirection, true, out pushType);
+                    abilitySecondary.energy = 0;
+                }
             }
 
-            abilityEnergy = Mathf.Clamp(abilityEnergy, 0, ability.cost + ability.maxExtraIncome);
             for (int i = statuses.Count - 1; i >= 0; i--)
             {
                 if (statuses[i].TimeDecay(Time.deltaTime))
@@ -98,22 +132,6 @@ public class Player : GridItem
             }
         }
         
-    }
-
-    public void EvaluteAbilityIncome(PlayerPushType p)
-    {
-        switch (p)
-        {
-            case PlayerPushType.None:
-                abilityEnergy += ability.incomeMove;
-                break;
-            case PlayerPushType.Box:
-                abilityEnergy += ability.incomePushBox;
-                break;
-            case PlayerPushType.Player:
-                abilityEnergy += ability.incomePushPlayer;
-                break;
-        }
     }
 
     public override void Destroy()
@@ -140,5 +158,56 @@ public class Player : GridItem
     public override bool CanPush()
     {
         return true;
+    }
+}
+
+[System.Serializable]
+public class PlayerAbility
+{
+    public Ability ability;
+    public Image display;
+    public Image icon;
+    public float energy;
+    public float energyMultiplier;
+
+    public void Reset(Ability newAbility)
+    {
+        newAbility.ResetAbility();
+        energy = 0;
+        ability = newAbility;
+        icon.sprite = ability.displayImage;
+    }
+
+    public bool UseAbility(Player p, GameBoard b)
+    {
+        return ability.UseAbility(p, b);
+    }
+
+    public void AddEnergy(float e)
+    {
+        energy += e * energyMultiplier;
+        energy = Mathf.Clamp(energy, 0, ability.cost + ability.maxExtraIncome);
+        display.fillAmount = Mathf.Lerp(display.fillAmount, energy / ability.cost, Time.deltaTime * 10f);
+    }
+
+    public void Income()
+    {
+        AddEnergy(Time.deltaTime * ability.incomeTime);
+    }
+
+    public void EvaluteAbilityIncome(PlayerPushType p)
+    {
+        switch (p)
+        {
+            case PlayerPushType.None:
+                AddEnergy(ability.incomeMove);
+                break;
+            case PlayerPushType.Box:
+                AddEnergy(ability.incomePushBox);
+                break;
+            case PlayerPushType.Player:
+                AddEnergy(ability.incomePushPlayer);
+                break;
+        }
     }
 }

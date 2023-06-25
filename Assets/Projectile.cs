@@ -7,6 +7,7 @@ public class Projectile : GridItem
 {
     public Vector2Int moveDir;
     [SerializeField] private float tickMove;
+    [SerializeField] private bool moveHit;
 
     private float timer;
     private GameBoard board;
@@ -63,9 +64,9 @@ public class Projectile : GridItem
             if (timer <= 0f)
             {
                 nextItem = board.GetGridItem(Vector2Int.RoundToInt(gridPos + moveDir));
-                board.PlayerMove(gridPos, moveDir, false, out pushType);
-                if (pushType != PlayerPushType.None)
-                {
+                if (nextItem != null) {
+                    if (moveHit)
+                        board.PlayerMove(gridPos, moveDir, false, out pushType);
                     HitObject(nextItem);
                 }
                 else

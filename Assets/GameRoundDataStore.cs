@@ -6,7 +6,13 @@ using UnityEngine;
 public class GameRoundDataStore : ScriptableObject
 {
     public int playerNum;
+    public bool[] activePlayers;
 
     public int[] playerWin;
-    public Ability[] playerAbility;
+    public Ability[] playerAbilityPrimary;
+    public Ability[] playerAbilitySecondary;
+
+    public CharacterData[] character;
+
+    public Map gameMap;
 }

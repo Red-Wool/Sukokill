@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfe147b3ff67d3d40bc9d408dab988a4, type: 3}
+  m_Name: RoundData
+  m_EditorClassIdentifier: 
+  playerNum: 2
+  activePlayers: 00000000
+  playerWin: 00000000000000000000000000000000
+  playerAbilityPrimary:
+  - {fileID: 11400000, guid: 85478d98a63f488459cafc79b1a025ca, type: 2}
+  - {fileID: 11400000, guid: 85478d98a63f488459cafc79b1a025ca, type: 2}
+  - {fileID: 11400000, guid: 85478d98a63f488459cafc79b1a025ca, type: 2}
+  - {fileID: 11400000, guid: 85478d98a63f488459cafc79b1a025ca, type: 2}
+  playerAbilitySecondary:
+  - {fileID: 11400000, guid: 85478d98a63f488459cafc79b1a025ca, type: 2}
+  - {fileID: 11400000, guid: 85478d98a63f488459cafc79b1a025ca, type: 2}
+  - {fileID: 11400000, guid: 85478d98a63f488459cafc79b1a025ca, type: 2}
+  - {fileID: 11400000, guid: 85478d98a63f488459cafc79b1a025ca, type: 2}
+  character:
+  - {fileID: 11400000, guid: 71c5bceea7eff9141b6083b5688613d7, type: 2}
+  - {fileID: 11400000, guid: 722b89a865c8f40458bcfc48c7da2171, type: 2}
+  - {fileID: 11400000, guid: fa6bb87cbbd6c764191b89c8db3e3833, type: 2}
+  - {fileID: 11400000, guid: e3e7502e1f9c15b46889a34a0e8e676c, type: 2}
+  gameMap: {fileID: 11400000, guid: 1205fb397ba823e489268e50fbe941ea, type: 2}

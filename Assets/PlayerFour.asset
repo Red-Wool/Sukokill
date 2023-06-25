@@ -16,4 +16,5 @@ MonoBehaviour:
   right: 104
   up: 116
   down: 103
-  ability: 121
+  abilityPrimary: 121
+  abilitySecondary: 114

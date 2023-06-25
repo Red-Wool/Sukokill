@@ -10,5 +10,6 @@ public class PlayerControl : ScriptableObject
     public KeyCode up;
     public KeyCode down;
 
-    public KeyCode ability;
+    public KeyCode abilityPrimary;
+    public KeyCode abilitySecondary;
 }

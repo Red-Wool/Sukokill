@@ -59,10 +59,14 @@ public class ObjectPool
 
     public void DisableAll()
     {
-        for (int i = 0; i < pool.Count; i++)
+        if (pool != null)
         {
-            pool[i].SetActive(false);
+            for (int i = 0; i < pool.Count; i++)
+            {
+                pool[i].SetActive(false);
+            }
         }
+        
     }
 
     public void Reset()

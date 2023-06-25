@@ -8,6 +8,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public GameBoard board;
+    public Map map;
     public ItemGenerator ig;
 
     public GameRoundDataStore roundData;
@@ -19,21 +20,27 @@ public class GameManager : MonoBehaviour
     public Slider playerCount;
 
     public TMP_Text[] winCountDisplay;
+    public Button playButton;
 
     public GameObject abilitySelectMenu;
     public Image[] abilityPlayerSelect;
+    public Image[] abilityPlayerSelectTwo;
 
     public GameObject gameMenu;
-    public GameObject[] abilityPlayerDisplay;
+    public GameObject[] abilityPlayerPrimaryDisplay;
+    public GameObject[] abilityPlayerSecondaryDisplay;
+    public Image[] abilityFillDisplay;
+    public Image[] abilityIconDisplay;
+    public PlayerDisplay[] playerDisplays;
     public Ability ignoreDisplay;
     public BlockPlace[] set;
 
     public GameObject endMenu;
     public TMP_Text winText;
-
     private int playerNum = 2;
-    private bool playing = false, gameEnd;
+    private bool playing = false, gameEnd; public static bool Playing;
     private string endGameText;
+    private bool primary;
 
     private IEnumerator winAnim;
 
@@ -44,11 +51,26 @@ public class GameManager : MonoBehaviour
         //TURBO!
         //Time.timeScale = 3f;
 
-        playerCount.value = roundData.playerNum;
+        for (int i = 0; i < roundData.activePlayers.Length; i++)
+        {
+
+        }
+
+        for (int i = 0; i < roundData.character.Length; i++)
+        {
+            SelectCharacter(i, roundData.character[i]);
+        }
+        
+
+        //playerCount.value = roundData.playerNum;
         gameEnd = false;
         for (int i = 0; i < abilityPlayerSelect.Length; i++)
         {
-            abilityPlayerSelect[i].sprite = roundData.playerAbility[i].displayImage;
+            abilityPlayerSelect[i].sprite = roundData.playerAbilityPrimary[i].displayImage;
+        }
+        for (int i = 0; i < abilityPlayerSelectTwo.Length; i++)
+        {
+            abilityPlayerSelectTwo[i].sprite = roundData.playerAbilitySecondary[i].displayImage;
         }
 
         for (int i = 0; i < winCountDisplay.Length; i++)
@@ -65,23 +87,32 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        map = roundData.gameMap;
+
+        board.UpdateMap(map);
+        for (int i = 0; i < map.playerSpawn.Length; i++)
+        {
+            playerSpawn[i].pos = map.playerSpawn[i];
+        }
+
         startMenu.SetActive(false);
         ig.StartGame(board.board);
 
-        roundData.playerNum = playerNum;
+        //roundData.playerNum = playerNum;
 
         gameMenu.SetActive(true);
         for (int i = 0; i < playerSpawn.Length; i++)
         {
             SpawnPosition p = playerSpawn[i];
-            if (i < playerNum)
+            if (roundData.activePlayers[i])
             {
                 board.ReplacePosition(p.pos.x, p.pos.y, p.item);
 
                 p.item.gameObject.SetActive(true);
 
-                abilityPlayerDisplay[i].SetActive(roundData.playerAbility[i] != ignoreDisplay);
-                p.item.GetComponent<Player>().ResetPlayer(roundData.playerAbility[i]);
+                abilityPlayerPrimaryDisplay[i].SetActive(roundData.playerAbilityPrimary[i] != ignoreDisplay);
+                abilityPlayerSecondaryDisplay[i].SetActive(roundData.playerAbilitySecondary[i] != ignoreDisplay);
+                p.item.GetComponent<Player>().ResetPlayer(roundData.character[i], roundData.playerAbilityPrimary[i], roundData.playerAbilitySecondary[i]);
             }
             else
                 p.item.gameObject.SetActive(false);
@@ -99,10 +130,19 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        int players = 0;
+        for (int i = 0; i < roundData.activePlayers.Length; i++)
+        {
+            if (roundData.activePlayers[i])
+                players++;
+        }
+        playButton.interactable = players >= 2;
+
+        Playing = playing;
         if (playing)
         {
             int count = 0;
-            for (int i = 0; i < playerNum; i++)
+            for (int i = 0; i < playerSpawn.Length; i++)
             {
                 if (playerSpawn[i].item.GetComponent<Player>().canMove)
                     count++;
@@ -184,20 +224,61 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetMap(Map map)
+    {
+        roundData.gameMap = map;
+    }
+
     public void SelectAbility(int player)
     {
         playerAbilitySelect = player;
         abilitySelectMenu.SetActive(true);
+        primary = true;
+    }
+
+    public void SelectAbility(int player, Ability ability)
+    {
+        playerAbilitySelect = player;
+        primary = true;
+        SetAbility(ability);
+    }
+
+    public void SelectSecondary(int player)
+    {
+        playerAbilitySelect = player;
+        abilitySelectMenu.SetActive(true);
+        primary = false;
+    }
+
+    public void SelectCharacter(int player, CharacterData data)
+    {
+        roundData.character[player] = data;
+
+        abilityIconDisplay[player].color = data.baseColor;
+        abilityFillDisplay[player].color = data.supportColor;
     }
 
     public void SetAbility(Ability a)
     {
-        roundData.playerAbility[playerAbilitySelect] = a;
-        abilitySelectMenu.SetActive(false);
-
-        for (int i = 0; i < abilityPlayerSelect.Length; i++)
+        if (primary)
         {
-            abilityPlayerSelect[i].sprite = roundData.playerAbility[i].displayImage;
+            roundData.playerAbilityPrimary[playerAbilitySelect] = a;
+            abilitySelectMenu.SetActive(false);
+
+            for (int i = 0; i < abilityPlayerSelect.Length; i++)
+            {
+                abilityPlayerSelect[i].sprite = roundData.playerAbilityPrimary[i].displayImage;
+            }
+        }
+        else
+        {
+            roundData.playerAbilitySecondary[playerAbilitySelect] = a;
+            abilitySelectMenu.SetActive(false);
+
+            for (int i = 0; i < abilityPlayerSelectTwo.Length; i++)
+            {
+                abilityPlayerSelectTwo[i].sprite = roundData.playerAbilitySecondary[i].displayImage;
+            }
         }
     }
 }

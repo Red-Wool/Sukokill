@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   display: {fileID: 6629002657911766761}
   projectilePool:
-    poolObject: {fileID: 3496635857588777429, guid: 21082324bfda78349a5c414566fe3c52,
+    poolObject: {fileID: 4276772619370499216, guid: 36a29ffc0e07f0548a8114ce02e5f5c3,
       type: 3}
     initAmount: 2
   shootRate: 0.5

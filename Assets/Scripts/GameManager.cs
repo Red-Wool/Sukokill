@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour
 
                 Player p;
                 bool tieFlag = true;
-                for (int i = 0; i < playerNum; i++)
+                for (int i = 0; i < playerSpawn.Length; i++)
                 {
                     p = playerSpawn[i].item.GetComponent<Player>();
                     if (p.canMove)

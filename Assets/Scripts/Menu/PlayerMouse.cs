@@ -60,7 +60,7 @@ public class PlayerMouse : MonoBehaviour
 
             Vector3 inp = new Vector3((Input.GetKey(controls.right) ? 1 : 0) + (Input.GetKey(controls.left) ? -1 : 0), (Input.GetKey(controls.up) ? 1 : 0) + (Input.GetKey(controls.down) ? -1 : 0),0);
             transform.position += inp * Time.deltaTime * mouseSpeed;
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x, -80, 80), Mathf.Clamp(transform.position.y, -80, 80), transform.position.z);
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, -100, 100), Mathf.Clamp(transform.position.y, -60, 60), transform.position.z);
             
             pointer = new PointerEventData(eventSystem);
             pointer.position = cam.WorldToScreenPoint(transform.position);
@@ -112,7 +112,7 @@ public class PlayerMouse : MonoBehaviour
         transform.localScale = Vector3.zero;
         transform.DOScale(1, 2f).SetEase(Ease.OutSine);
         mouseSprite.enabled = true;
-        mouseSprite.transform.localScale = Vector3.one * 30f;
+        mouseSprite.transform.localScale = Vector3.one * 10f;
         mouseSprite.transform.DOScale(Vector3.one, 2.5f).SetEase(Ease.OutBounce);
 
         display.SelectCharacter(manager.roundData.character[playerNum]);

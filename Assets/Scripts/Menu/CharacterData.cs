@@ -10,4 +10,5 @@ public class CharacterData : ScriptableObject
     public Gradient characterGradient;
     public Color baseColor;
     public Color supportColor;
+    public Color textColor;
 }

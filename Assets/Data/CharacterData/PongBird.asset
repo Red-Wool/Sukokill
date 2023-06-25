@@ -45,3 +45,4 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   baseColor: {r: 0.9058824, g: 0.9058824, b: 0.9058824, a: 1}
   supportColor: {r: 0.9058824, g: 0.9803922, b: 0.20392159, a: 1}
+  textColor: {r: 0, g: 0, b: 0, a: 1}

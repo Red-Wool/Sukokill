@@ -37,8 +37,13 @@ public class PlayerDisplay : MonoBehaviour
         characterDisplay.sprite = data.characterSprite;
         background.color = data.supportColor;
         Color col = data.baseColor;
+        selectedAbility.color = col;
         col.a = .2f;
         abilityDisplay.color = col;
+
+        playerName.color = data.textColor;
+        abilityName.color = data.textColor;
+        abilityDescription.color = data.textColor;
     }
 
     public void NoCharacter(int num)

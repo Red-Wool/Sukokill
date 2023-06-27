@@ -6,6 +6,7 @@ using DG.Tweening;
 public class GameBoard : MonoBehaviour
 {
     public Map defaultMap;
+    public GamePalette palette;
     public Board board;
     public Vector2 gridSize;
     public Vector2 gridOffset;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class PlayerDisplay : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class PlayerDisplay : MonoBehaviour
     public Image abilityDisplay;
     public TMP_Text abilityName;
     public TMP_Text abilityDescription;
+
+    public CharacterData currentCharacter { private set; get; }
 
     private bool isOn;
     // Start is called before the first frame update
@@ -33,13 +36,20 @@ public class PlayerDisplay : MonoBehaviour
     {
         isOn = true;
 
+        currentCharacter = data;
+
         playerName.text = data.characterName;
         characterDisplay.sprite = data.characterSprite;
         background.color = data.supportColor;
+
         Color col = data.baseColor;
         selectedAbility.color = col;
         col.a = .2f;
         abilityDisplay.color = col;
+
+        characterDisplay.transform.DOKill();
+        characterDisplay.transform.localScale = Vector3.one * 2f;
+        characterDisplay.transform.DOScale(1, .5f).SetEase(Ease.OutQuint);
 
         playerName.color = data.textColor;
         abilityName.color = data.textColor;
@@ -101,6 +111,21 @@ public class PlayerDisplay : MonoBehaviour
         abilityDisplay.sprite = ability.displayImage;
     }
 
+    public void InspectCharacter(CharacterData data)
+    {
+        if (!isOn)
+            return;
+
+        abilityDescription.text = "Switch to " + data.characterName + "?";
+
+
+        characterDisplay.enabled = false;
+        abilityDisplay.enabled = true;
+
+        abilityDisplay.color = new Color(1, 1, 1, .2f);
+        abilityDisplay.sprite = data.characterSprite;
+    }
+
     public void StopInspection()
     {
         if (!isOn)
@@ -108,6 +133,10 @@ public class PlayerDisplay : MonoBehaviour
 
         abilityName.text = "";
         abilityDescription.text = "";
+
+        Color col = currentCharacter.baseColor;
+        col.a = .2f;
+        abilityDisplay.color = col;
 
         characterDisplay.enabled = true;
         abilityDisplay.enabled = false;

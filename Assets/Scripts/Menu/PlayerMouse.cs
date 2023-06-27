@@ -21,8 +21,7 @@ public class PlayerMouse : MonoBehaviour
     [SerializeField] private EventSystem eventSystem;
     private PointerEventData pointer;
     private Camera cam;
-
-    
+    private RectTransform rectPos;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +29,7 @@ public class PlayerMouse : MonoBehaviour
         activated = false;
         mouseSprite.enabled = false;
         cam = Camera.main;
+        rectPos = GetComponent<RectTransform>();
 
         if (manager.roundData.activePlayers[playerNum])
             display.SelectCharacter(manager.roundData.character[playerNum]);
@@ -58,9 +58,11 @@ public class PlayerMouse : MonoBehaviour
                 DisableMouse();
             }
 
-            Vector3 inp = new Vector3((Input.GetKey(controls.right) ? 1 : 0) + (Input.GetKey(controls.left) ? -1 : 0), (Input.GetKey(controls.up) ? 1 : 0) + (Input.GetKey(controls.down) ? -1 : 0),0);
-            transform.position += inp * Time.deltaTime * mouseSpeed;
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x, -100, 100), Mathf.Clamp(transform.position.y, -60, 60), transform.position.z);
+            Vector3 inp = new Vector2((Input.GetKey(controls.right) ? 1 : 0) + (Input.GetKey(controls.left) ? -1 : 0), (Input.GetKey(controls.up) ? 1 : 0) + (Input.GetKey(controls.down) ? -1 : 0));
+            rectPos.position += inp * Time.deltaTime * mouseSpeed;
+
+            Vector2 bound = CameraManager.cameraBounds;
+            rectPos.position = new Vector2(Mathf.Clamp(transform.position.x, -bound.x, bound.x), Mathf.Clamp(transform.position.y, -bound.y, bound.y));
             
             pointer = new PointerEventData(eventSystem);
             pointer.position = cam.WorldToScreenPoint(transform.position);
@@ -76,11 +78,13 @@ public class PlayerMouse : MonoBehaviour
                 AbilityMenuDisplay ability = result[0].gameObject.GetComponent<AbilityMenuDisplay>();
                 if (ability)
                 {
-                    display.InspectAbility(ability.GetAbility());
+                    Ability data = ability.GetAbility();
+
+                    display.InspectAbility(data);
                     if (Input.GetKeyDown(controls.abilityPrimary))
                     {
-                        manager.SelectAbility(playerNum, ability.GetAbility());
-                        display.SelectAbility(ability.GetAbility());
+                        manager.SelectAbility(playerNum, data);
+                        display.SelectAbility(data);
                     }
                 }
                 else
@@ -89,11 +93,29 @@ public class PlayerMouse : MonoBehaviour
                 }
 
                 CharacterMenuDisplay character = result[0].gameObject.GetComponent<CharacterMenuDisplay>();
-                if (character && Input.GetKeyDown(controls.abilityPrimary))
+                if (character)
                 {
-                    manager.SelectCharacter(playerNum, character.GetCharacter());
-                    display.SelectCharacter(character.GetCharacter());
+                    CharacterData data = character.GetCharacter();
+
+                    if (display.currentCharacter != data)
+                    {
+                        display.InspectCharacter(data);
+                    }
+
+                    if (Input.GetKeyDown(controls.abilityPrimary))
+                    {
+                        manager.SelectCharacter(playerNum, data);
+                        display.SelectCharacter(data);
+                    }
+
+                    
                     //display.InspectAbility(ability.GetAbility());
+                }
+
+                Button button = result[0].gameObject.GetComponent<Button>();
+                if (button && Input.GetKeyDown(controls.abilityPrimary))
+                {
+                    button.onClick.Invoke();
                 }
             }
             else
